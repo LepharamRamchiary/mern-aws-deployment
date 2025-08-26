@@ -6,12 +6,18 @@ import { Task } from "../models/task.model.js";
 const createTask = asyncHandler(async (req, res) => {
   const { title, description } = req.body;
 
-//   const task = new Task({ title, description });
-//   await task.save();
-
   const task = await Task.create({ title, description });
 
-  res.status(201).json(new ApiResponse(true, task, "Task created"));
+  res.status(201).json(new ApiResponse(201, task, "Task created"));
 });
 
-export { createTask };
+const getAllTasks = asyncHandler(async (req, res) => {
+    const tasks = await Task.find();
+    if(!tasks){
+        throw new ApiError(404, "No tasks found");
+    }
+    res.status(200).json(new ApiResponse(200, tasks, "Tasks retrieved"));
+
+})
+
+export { createTask , getAllTasks};

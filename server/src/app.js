@@ -18,10 +18,9 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 // routes import
-
+import taskRouter from "./routers/task.route.js"
 
 // routes declaration
-
-
+app.use("/api/v1/tasks", taskRouter)
 
 export { app }

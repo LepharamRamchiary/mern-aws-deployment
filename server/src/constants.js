@@ -1,1 +1,1 @@
-export const DB_NAME = "task"
+export const DB_NAME = "task";

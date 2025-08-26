@@ -20,4 +20,13 @@ const getAllTasks = asyncHandler(async (req, res) => {
 
 })
 
-export { createTask , getAllTasks};
+const deleteTask = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const task = await Task.findByIdAndDelete(id);
+    if(!task){
+        throw new ApiError(404, "Task not found");
+    }
+    res.status(200).json(new ApiResponse(200, task, "Task deleted"));
+});
+
+export { createTask , getAllTasks, deleteTask};

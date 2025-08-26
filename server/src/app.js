@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config()
+import path from "path"
+
 
 const app = express()
 
@@ -10,6 +12,10 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
+
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname, "../client/dist")
+app.use(express.static(buildPath))
 
 //json data 
 app.use(express.json({limit: "20kb"}))
